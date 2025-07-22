@@ -6,25 +6,26 @@
 /*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 11:36:09 by szemmour          #+#    #+#             */
-/*   Updated: 2025/07/12 11:53:22 by szemmour         ###   ########.fr       */
+/*   Updated: 2025/07/15 11:48:56 by szemmour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "includes/cub3d.h"
 
 void	free_arr(void **arr)
 {
-	size_t	i;
-
-    if(!arr)
+    size_t	i;
+    
+    if (!arr)
         return;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
+        
+    i = 0;
+    while (arr[i])
+    {
+        free(arr[i]);
+        i++;
+    }
+    free(arr);
 }
 
 static void	free_texinfo(t_texinfo *textures)

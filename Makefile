@@ -1,23 +1,57 @@
-NAME = cub3D
+NAME     = cub3D
 
-SRCS = src/main.c
+CC       = cc
+CFLAGS   = -Wall -Wextra -Werror
+
+GNLDIR = includes/gnl
+LIBFTDIR = includes/libft
+# MLXDIR = includes/mlx
+
+# LMLX = $(MLXDIR)/libmlx.a -framework OpenGL -framework AppKit
+LIBFT = $(LIBFTDIR)/libft.a
+
+
+SRCS = \
+	main.c \
+	parcing/check_file.c \
+	parcing/check_map_closed.c \
+	parcing/check_map.c \
+	parcing/check_textures.c \
+	parcing/create_map.c \
+	parcing/fill_color_textures.c \
+	parcing/get_file_data.c \
+	parcing/init_game.c \
+	parcing/init_player_dir.c \
+	parcing/parcing_utils.c \
+	parcing/parse_data.c \
+	errors.c \
+	free_game.c \
+	$(GNLDIR)/get_next_line.c $(GNLDIR)/get_next_line_utils.c
+
 OBJS = $(SRCS:.c=.o)
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-
-MLX_DIR = mlx
-MLX = $(MLX_DIR)/libmlx.a -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(MLX) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT)
+# 	$(MAKE) -C $(MLXDIR)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LMLX) -o $(NAME)
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFTDIR)
+
+%.o: %.c includes/cub3d.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+	$(MAKE) -C $(LIBFTDIR) clean
+# 	$(MAKE) -C $(MLXDIR) clean
 	rm -f $(OBJS)
 
 fclean: clean
+	$(MAKE) -C $(LIBFTDIR) fclean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

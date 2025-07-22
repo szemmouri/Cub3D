@@ -6,11 +6,11 @@
 /*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 12:33:57 by szemmour          #+#    #+#             */
-/*   Updated: 2025/07/12 12:36:09 by szemmour         ###   ########.fr       */
+/*   Updated: 2025/07/15 11:07:52 by szemmour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../includes/cub3d.h"
 
 static int	is_dir(char *file_name)
 {

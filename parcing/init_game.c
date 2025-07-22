@@ -6,11 +6,11 @@
 /*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:29:42 by szemmour          #+#    #+#             */
-/*   Updated: 2025/07/12 13:29:43 by szemmour         ###   ########.fr       */
+/*   Updated: 2025/07/15 11:40:25 by szemmour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../includes/cub3d.h"
 
 void	init_img(t_img *img)
 {
@@ -19,6 +19,24 @@ void	init_img(t_img *img)
 	img->pixel_bits = 0;
 	img->size_line = 0;
 	img->endian = 0;
+}
+
+void	init_texinfo(t_texinfo *texinfo)
+{
+	texinfo->north = NULL;
+	texinfo->south = NULL;
+	texinfo->west = NULL;
+	texinfo->east = NULL;
+	texinfo->floor = NULL;
+	texinfo->ceiling = NULL;
+	texinfo->hex_floor = 0;
+	texinfo->hex_ceiling = 0;
+	texinfo->size = 0;
+	texinfo->index = 0;
+	texinfo->step = 0.0;
+	texinfo->pos = 0.0;
+	texinfo->x = 0;
+	texinfo->y = 0;
 }
 
 static void	init_mapinfo(t_mapinfo *mapinfo)
@@ -34,7 +52,7 @@ static void	init_mapinfo(t_mapinfo *mapinfo)
 
 static void	init_player(t_player *player)
 {
-	player->dir = '\0';
+	player->dir = '0';
 	player->pos_x = 0.0;
 	player->pos_y = 0.0;
 	player->dir_x = 0.0;
