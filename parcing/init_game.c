@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 13:29:42 by szemmour          #+#    #+#             */
-/*   Updated: 2025/07/15 11:40:25 by szemmour         ###   ########.fr       */
+/*   Created: 2025/07/23 19:44:35 by mel-adna          #+#    #+#             */
+/*   Updated: 2025/07/23 19:44:45 by mel-adna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	init_mapinfo(t_mapinfo *mapinfo)
 	mapinfo->index_end_of_map = 0;
 }
 
-static void	init_player(t_player *player)
+static void	init_player_parsing(t_player *player)
 {
 	player->dir = '0';
 	player->pos_x = 0.0;
@@ -71,7 +71,7 @@ void	init_game(t_game *game)
 	game->win = NULL;
 	game->win_height = WIN_HEIGHT;
 	game->win_width = WIN_WIDTH;
-	init_player(&game->player);
+	init_player_parsing(&game->player);
 	init_texinfo(&game->texinfo);
 	game->map = NULL;
 	init_mapinfo(&game->mapinfo);

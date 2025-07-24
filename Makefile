@@ -5,9 +5,10 @@ CFLAGS   = -Wall -Wextra -Werror
 
 GNLDIR = includes/gnl
 LIBFTDIR = includes/libft
-# MLXDIR = includes/mlx
 
-# LMLX = $(MLXDIR)/libmlx.a -framework OpenGL -framework AppKit
+
+MLXDIR = includes/mlx
+LMLX = $(MLXDIR)/libmlx.a -framework OpenGL -framework AppKit
 LIBFT = $(LIBFTDIR)/libft.a
 
 
@@ -26,6 +27,13 @@ SRCS = \
 	parcing/parse_data.c \
 	errors.c \
 	free_game.c \
+	render/render_init.c \
+	render/render_drawing.c \
+	render/render_textures.c \
+	render/render_utils.c \
+	render/render_raycasting.c \
+	render/render_player.c \
+	render/render_main.c \
 	$(GNLDIR)/get_next_line.c $(GNLDIR)/get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o)
@@ -34,7 +42,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-# 	$(MAKE) -C $(MLXDIR)
+	$(MAKE) -C $(MLXDIR)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LMLX) -o $(NAME)
 
 $(LIBFT):
@@ -45,7 +53,7 @@ $(LIBFT):
 
 clean:
 	$(MAKE) -C $(LIBFTDIR) clean
-# 	$(MAKE) -C $(MLXDIR) clean
+	$(MAKE) -C $(MLXDIR) clean
 	rm -f $(OBJS)
 
 fclean: clean
