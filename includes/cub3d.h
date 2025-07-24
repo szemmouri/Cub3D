@@ -6,7 +6,7 @@
 /*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 19:32:17 by mel-adna          #+#    #+#             */
-/*   Updated: 2025/07/23 19:43:09 by mel-adna         ###   ########.fr       */
+/*   Updated: 2025/07/24 19:00:23 by mel-adna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,26 @@
 # define DEBUG 0
 
 # define W 13
-# define A 0
+# define A 2
 # define S 1
-# define D 2
+# define D 0
 # define LEFT 123
 # define RIGHT 124
 # define ESC 53
 
 # define TEXTURE_SIZE 64
+# define C_M 14
 
 # define PI 3.14159265359
 
 // size of each map cell in the minimap (in pixels)
-# define MINI_TILE 10
+# define MINI_TILE 8
 
 // margin from the window borders
 # define MINI_MARGIN 10
 
 // Radius of the player dot
-# define MINI_PLAYER_SIZE 4
+# define MINI_PLAYER_SIZE 3
 
 // color constants
 # define COLOR_MINI_WALL 0x0000FF   // blue
