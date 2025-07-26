@@ -6,7 +6,7 @@
 /*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 19:30:04 by mel-adna          #+#    #+#             */
-/*   Updated: 2025/07/24 17:58:21 by mel-adna         ###   ########.fr       */
+/*   Updated: 2025/07/26 11:46:27 by mel-adna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,42 @@ int	mouse_move(int x, int y, t_game *game)
 	return (0);
 }
 
+static bool	safe_move_collision_check(float x, float y, t_game *g)
+{
+	float	buffer;
+
+	buffer = 15;
+	if (is_wall_collision(x + buffer, y + buffer, g) || is_wall_collision(x
+			- buffer, y + buffer, g) || is_wall_collision(x + buffer, y
+			- buffer, g) || is_wall_collision(x - buffer, y - buffer, g))
+		return (true);
+	if (is_wall_collision(x, y, g))
+		return (true);
+	return (false);
+}
+
 static void	try_move_to(t_player *p, t_game *g, float nx, float ny)
 {
-	if (!is_wall_collision(nx + C_M, ny + C_M, g) && !is_wall_collision(nx
-			- C_M, ny - C_M, g))
+	float	old_x;
+	float	old_y;
+
+	old_x = p->x;
+	old_y = p->y;
+	if (!safe_move_collision_check(nx, ny, g))
 	{
 		p->x = nx;
 		p->y = ny;
+		return ;
+	}
+	if (!safe_move_collision_check(nx, old_y, g))
+	{
+		p->x = nx;
+		return ;
+	}
+	if (!safe_move_collision_check(old_x, ny, g))
+	{
+		p->y = ny;
+		return ;
 	}
 }
 

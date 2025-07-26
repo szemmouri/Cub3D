@@ -6,7 +6,7 @@ static t_ray_data	cast_ray(t_player *player, t_game *game, float ray_angle)
 	float		step;
 	int			max_iterations;
 
-	step = 1;
+	step = 0.6;
 	max_iterations = 2000;
 	ray.x = player->x;
 	ray.y = player->y;
@@ -19,8 +19,8 @@ static t_ray_data	cast_ray(t_player *player, t_game *game, float ray_angle)
 		max_iterations--;
 	}
 	ray.dist = fixed_dist(player->x, player->y, ray.x, ray.y, game);
-	if (ray.dist < 0.1)
-		ray.dist = 0.1;
+	if (ray.dist < 0.2)
+		ray.dist = 0.2;
 	return (ray);
 }
 
@@ -29,8 +29,8 @@ static t_wall_data	calculate_wall_params(t_ray_data ray)
 	t_wall_data	wall;
 
 	wall.height = (BLOCK * HEIGHT) / ray.dist;
-	if (wall.height > HEIGHT * 3)
-		wall.height = HEIGHT * 3;
+	// if (wall.height > HEIGHT * 4)
+	// 	wall.height = HEIGHT * 4;
 	wall.start_y = (HEIGHT - wall.height) / 2;
 	wall.end_y = wall.start_y + wall.height;
 	if (wall.end_y > HEIGHT)
@@ -57,11 +57,11 @@ static t_texture_data	get_texture_coords(t_ray_data ray, t_wall_data wall)
 	if (wall.height > 0)
 		tex.step = (float)TEXTURE_SIZE / wall.height;
 	else
-		tex.step = 1.0;
+		tex.step = 1;
 	if (tex.step > TEXTURE_SIZE)
 		tex.step = TEXTURE_SIZE;
-	if (tex.step < 0.01)
-		tex.step = 0.01;
+	if (tex.step < 0.001)
+		tex.step = 0.001;
 	return (tex);
 }
 
