@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/27 12:01:46 by szemmour          #+#    #+#             */
+/*   Updated: 2025/07/27 12:09:02 by szemmour         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
+
 static int	check_map_elements(t_game *game, char **map)
 {
 	int	i;
@@ -11,14 +24,14 @@ static int	check_map_elements(t_game *game, char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			while (game->map[i][j] == ' ' || game->map[i][j] == '\t'
-			|| game->map[i][j] == '\r'
-			|| game->map[i][j] == '\v' || game->map[i][j] == '\f')
+			while (is_space(map[i][j]))
 				j++;
 			if (!(ft_strchr("10NSEW", map[i][j])))
-				return (print_error(game->mapinfo.path, ERR_INV_LETTER), FAILURE);
+				return (print_error(game->mapinfo.path, ERR_INV_LETTER),
+					FAILURE);
 			if (ft_strchr("NSEW", map[i][j]) && game->player.dir != '0')
-				return (print_error(game->mapinfo.path, ERR_NUM_PLAYER), FAILURE);
+				return (print_error(game->mapinfo.path, ERR_NUM_PLAYER),
+					FAILURE);
 			if (ft_strchr("NSEW", map[i][j]) && game->player.dir == '0')
 				game->player.dir = map[i][j];
 			j++;
@@ -35,12 +48,9 @@ static int	check_position_is_valid(t_game *game, char **map)
 
 	i = (int)game->player.pos_y;
 	j = (int)game->player.pos_x;
-	if (ft_strlen(map[i - 1]) < (size_t)j
-		|| ft_strlen(map[i + 1]) < (size_t)j
-		|| is_space(map[i][j - 1])
-		|| is_space(map[i][j + 1])
-		|| is_space(map[i - 1][j])
-		|| is_space(map[i + 1][j]))
+	if (ft_strlen(map[i - 1]) < (size_t)j || ft_strlen(map[i + 1]) < (size_t)j
+		|| is_space(map[i][j - 1]) || is_space(map[i][j + 1]) || is_space(map[i
+			- 1][j]) || is_space(map[i + 1][j]))
 		return (FAILURE);
 	return (SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 19:32:17 by mel-adna          #+#    #+#             */
-/*   Updated: 2025/07/24 19:00:23 by mel-adna         ###   ########.fr       */
+/*   Updated: 2025/07/27 13:28:18 by szemmour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@
 # define SUCCESS 0
 # define FAILURE 1
 # define ERR -1
-# define CONTINUE 1
-# define BREAK 2
-# define WHITE_SPACE_CHARS " \t\n"
+# define CONTINUE 2
 
 // Raycasting defines
 # define WIDTH 1280
@@ -77,6 +75,7 @@
 # define ERR_FLOOR_CEILING "Invalid floor/ceiling RGB color(s)"
 # define ERR_COLOR_FLOOR "Invalid floor RGB color"
 # define ERR_COLOR_CEILING "Invalid ceiling RGB color"
+# define ERR_COLOR_DUPLICATE "Duplicate floor/ceiling RGB color"
 # define ERR_INVALID_MAP "Map description is either wrong or incomplete"
 # define ERR_INV_LETTER "Invalid character in map"
 # define ERR_NUM_PLAYER "Map has more than one player"
@@ -136,7 +135,6 @@ typedef struct s_mapinfo
 
 typedef struct s_player
 {
-	// Parsing fields
 	char			dir;
 	double			pos_x;
 	double			pos_y;
@@ -148,7 +146,6 @@ typedef struct s_player
 	int				move_x;
 	int				move_y;
 	int				rotate;
-	// Rendering fields
 	float			x;
 	float			y;
 	float			angle;
@@ -173,7 +170,6 @@ typedef struct s_game
 	t_mapinfo		mapinfo;
 	t_texinfo		texinfo;
 	t_img			minimap;
-	// Rendering fields
 	void			*img;
 	char			*data;
 	int				bpp;
@@ -213,7 +209,6 @@ int					get_file_data(t_game *game, char **map);
 int					free_game(t_game *game);
 void				print_error(char *mssg, char *str);
 void				print_value_error(int mssg, char *str);
-void				clean_exit(t_game *game);
 void				free_arr(void **arr);
 int					is_space(char c);
 int					check_file(char *file_name, int cub);
@@ -226,14 +221,11 @@ int					check_textures_validity(t_game *game, t_texinfo *textures);
 int					check_map(t_game *game, char **map);
 void				init_player_direction(t_game *game);
 void				init_texinfo(t_texinfo *texinfo);
-
-// test
-void				example_usage(char *map_file);
-void				sync_player_data(t_game *game);
-int					parser(t_game *game, char *fpath);
-int					exit_game(t_game *game);
+int					skip_whitespace(char *line, int j);
 
 // Rendering functions
+void				sync_player_data(t_game *game);
+int					exit_game(t_game *game);
 void				init_player(t_player *p);
 int					key_press(int kc, t_game *game);
 int					key_release(int kc, t_game *game);

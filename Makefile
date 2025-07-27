@@ -1,8 +1,7 @@
 NAME     = cub3D
 
 CC       = cc
-CFLAGS   = -Wall -Wextra -Werror
-
+CFLAGS   = -Wall -Wextra -Werror #-g -fsanitize=address
 GNLDIR = includes/gnl
 LIBFTDIR = includes/libft
 
@@ -25,7 +24,6 @@ SRCS = \
 	parcing/init_player_dir.c \
 	parcing/parcing_utils.c \
 	parcing/parse_data.c \
-	errors.c \
 	free_game.c \
 	render/render_init.c \
 	render/render_drawing.c \
@@ -62,4 +60,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: clean

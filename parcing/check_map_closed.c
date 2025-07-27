@@ -6,46 +6,66 @@
 /*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:18:49 by szemmour          #+#    #+#             */
-/*   Updated: 2025/07/15 11:08:49 by szemmour         ###   ########.fr       */
+/*   Updated: 2025/07/27 12:01:34 by szemmour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-
-static int	check_top_or_bottom(char **map, int i, int j)
+static int	check_row_walls(char *row)
 {
-	if (!map || !map[i] || !map[i][j])
+	int	i;
+
+	i = 0;
+	if (!row)
 		return (FAILURE);
-	while (map[i][j] == ' ' || map[i][j] == '\t'
-	|| map[i][j] == '\r' || map[i][j] == '\v'
-	|| map[i][j] == '\f')
-		j++;
-	while (map[i][j])
+	while (row[i] && is_space(row[i]))
+		i++;
+	while (row[i])
 	{
-		if (map[i][j] != '1')
+		if (!is_space(row[i]) && row[i] != '1')
 			return (FAILURE);
-		j++;
+		i++;
 	}
 	return (SUCCESS);
 }
 
-int	check_map_closed(t_mapinfo *map, char **map_arr)
+static int	check_side_walls(char *row)
+{
+	int	left;
+	int	right;
+
+	left = 0;
+	if (!row)
+		return (FAILURE);
+	right = ft_strlen(row) - 1;
+	while (row[left] && is_space(row[left]))
+		left++;
+	if (row[left] != '1')
+		return (FAILURE);
+	while (right >= 0 && is_space(row[right]))
+		right--;
+	if (right < 0 || row[right] != '1' || left == right)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+int	check_map_closed(t_mapinfo *mapinfo, char **map)
 {
 	int	i;
-	int	j;
 
-	if (check_top_or_bottom(map_arr, 0, 0) == FAILURE)
-		return (FAILURE);
 	i = 1;
-	while (i < (map->height - 1))
+	if (!map || !mapinfo)
+		return (FAILURE);
+	if (check_row_walls(map[0]) == FAILURE)
+		return (FAILURE);
+	while (i < mapinfo->height - 1)
 	{
-		j = ft_strlen(map_arr[i]) - 1;
-		if (map_arr[i][j] != '1')
+		if (check_side_walls(map[i]) == FAILURE)
 			return (FAILURE);
 		i++;
 	}
-	if (check_top_or_bottom(map_arr, i, 0) == FAILURE)
+	if (check_row_walls(map[mapinfo->height - 1]) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
 }
