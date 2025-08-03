@@ -1,7 +1,7 @@
 NAME     = cub3D
 
 CC       = cc
-CFLAGS   = -Wall -Wextra -Werror
+CFLAGS   = -Wall -Wextra -Werror -g -fsanitize=address
 
 GNLDIR = includes/gnl
 LIBFTDIR = includes/libft
