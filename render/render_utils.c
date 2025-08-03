@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/03 12:50:43 by mel-adna          #+#    #+#             */
+/*   Updated: 2025/08/03 13:43:53 by mel-adna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 bool	allocate_texture_memory(t_game *game)
@@ -47,15 +59,15 @@ float	distance(float x, float y)
 	return (sqrt(x * x + y * y));
 }
 
-float	fixed_dist(float x1, float y1, float x2, float y2, t_game *game)
+float	fixed_dist(t_point a, t_point b, t_game *game)
 {
 	float	delta_x;
 	float	delta_y;
 	float	angle;
 	float	fix_dist;
 
-	delta_x = x2 - x1;
-	delta_y = y2 - y1;
+	delta_x = b.x - a.x;
+	delta_y = b.y - a.y;
 	angle = atan2(delta_y, delta_x) - game->player.angle;
 	fix_dist = distance(delta_x, delta_y) * cos(angle);
 	return (fix_dist);

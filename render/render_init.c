@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 19:29:40 by mel-adna          #+#    #+#             */
-/*   Updated: 2025/07/27 13:24:17 by szemmour         ###   ########.fr       */
+/*   Created: 2025/08/03 13:15:29 by mel-adna          #+#    #+#             */
+/*   Updated: 2025/08/03 13:43:28 by mel-adna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ void	init_player(t_player *p)
 	p->x = WIDTH / 2;
 	p->y = HEIGHT / 2;
 	p->angle = PI / 2;
-	p->key_up = p->key_down = false;
-	p->key_left = p->key_right = false;
-	p->left_rotate = p->right_rotate = false;
+	p->key_up = false;
+	p->key_down = false;
+	p->key_left = false;
+	p->key_right = false;
+	p->left_rotate = false;
+	p->right_rotate = false;
 }
 
 void	clear_image(t_game *game)

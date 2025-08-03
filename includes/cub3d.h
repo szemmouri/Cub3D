@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 19:32:17 by mel-adna          #+#    #+#             */
-/*   Updated: 2025/07/27 13:28:18 by szemmour         ###   ########.fr       */
+/*   Updated: 2025/08/03 13:37:47 by mel-adna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,41 @@ typedef struct s_texture_data
 	float			step;
 }					t_texture_data;
 
+// minimap
+typedef struct s_minimap
+{
+	int				margin_x;
+	int				margin_y;
+	int				map_w;
+	int				map_h;
+	char			**map;
+	t_game			*game;
+}					t_minimap;
+
+typedef struct s_circle
+{
+	int				cx;
+	int				cy;
+	int				radius;
+	int				color;
+	t_game			*game;
+}					t_circle;
+
+typedef struct s_point
+{
+	float			x;
+	float			y;
+}					t_point;
+
+typedef struct s_square
+{
+	int				x;
+	int				y;
+	int				size;
+	int				color;
+	t_game			*game;
+}					t_square;
+
 // parcing
 void				init_game(t_game *game);
 void				parce_data(char *path, t_game *game);
@@ -232,15 +267,12 @@ int					key_release(int kc, t_game *game);
 void				move_player(t_player *p, t_game *g);
 bool				is_wall_collision(float x, float y, t_game *g);
 void				put_pixel(int x, int y, int color, t_game *game);
-void				draw_square(int x, int y, int size, int color,
-						t_game *game);
-void				draw_map(t_game *game);
+void				draw_square(t_square sq);
 void				init_game_render(t_game *game);
 void				clear_image(t_game *game);
 bool				touch(float px, float py, t_game *game);
 float				distance(float x, float y);
-float				fixed_dist(float x1, float y1, float x2, float y2,
-						t_game *game);
+float				fixed_dist(t_point a, t_point b, t_game *game);
 void				draw_textured_line(t_player *player, t_game *game,
 						float ray_angle, int column);
 int					get_wall_direction(float ray_x, float ray_y,

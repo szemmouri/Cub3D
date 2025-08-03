@@ -33,6 +33,8 @@ SRCS = \
 	render/render_raycasting.c \
 	render/render_player.c \
 	render/render_main.c \
+	render/render_drawing_map.c \
+	render/render_utils1.c \
 	$(GNLDIR)/get_next_line.c $(GNLDIR)/get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o)

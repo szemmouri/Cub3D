@@ -6,28 +6,11 @@
 /*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 19:29:49 by mel-adna          #+#    #+#             */
-/*   Updated: 2025/07/24 17:47:02 by mel-adna         ###   ########.fr       */
+/*   Updated: 2025/08/03 13:43:33 by mel-adna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void	render_debug_mode(t_game *game, t_player *p, float ray_angle,
-		float fraction)
-{
-	int	col;
-
-	col = 0;
-	draw_map(game);
-	draw_square((int)p->x, (int)p->y, 15, 0x00FF00, game);
-	while (col < WIDTH)
-	{
-		draw_textured_line(p, game, ray_angle, col);
-		ray_angle += fraction;
-		col++;
-	}
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-}
 
 void	render_scene(t_game *game)
 {
@@ -41,11 +24,6 @@ void	render_scene(t_game *game)
 	ray_angle = p->angle - PI / 6;
 	col = 0;
 	clear_image(game);
-	if (DEBUG)
-	{
-		render_debug_mode(game, p, ray_angle, fraction);
-		return ;
-	}
 	while (col < WIDTH)
 	{
 		draw_textured_line(p, game, ray_angle, col);
@@ -61,9 +39,10 @@ void	update_player_angle_and_position(t_game *game)
 	t_player	*p;
 	int			center_x;
 	int			delta_x;
+	int			mouse_x;
+	int			mouse_y;
 
 	p = &game->player;
-	int mouse_x, mouse_y;
 	center_x = WIDTH / 2;
 	mlx_mouse_get_pos(game->win, &mouse_x, &mouse_y);
 	delta_x = mouse_x - center_x;
