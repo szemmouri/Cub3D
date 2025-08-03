@@ -6,7 +6,7 @@
 /*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 12:41:10 by szemmour          #+#    #+#             */
-/*   Updated: 2025/07/15 11:51:39 by szemmour         ###   ########.fr       */
+/*   Updated: 2025/07/27 12:21:34 by szemmour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	lines_count(char *path)
 		print_error(path, strerror(errno));
 		return (-1);
 	}
-	
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -73,32 +72,21 @@ void	parce_data(char *path, t_game *game)
 	i = 0;
 	row = 0;
 	column = 0;
-	
 	game->mapinfo.line_count = lines_count(path);
 	if (game->mapinfo.line_count == -1)
-		return;
-		
+		return ;
 	game->mapinfo.path = path;
-	game->mapinfo.file = malloc((game->mapinfo.line_count + 1) * sizeof(char *));
+	game->mapinfo.file = malloc((game->mapinfo.line_count + 1)
+			* sizeof(char *));
 	if (!game->mapinfo.file)
-	{
-		print_error(NULL, ERR_MALLOC);
-		return;
-	}
-	
+		return (print_error(NULL, ERR_MALLOC));
 	game->mapinfo.fd = open(path, O_RDONLY);
 	if (game->mapinfo.fd < 0)
-	{
-		print_error(path, strerror(errno));
-		free(game->mapinfo.file);
-		game->mapinfo.file = NULL;
-		return;
-	}
-	
+		return (print_error(path, strerror(errno)), free(game->mapinfo.file));
 	if (fill_arr(row, column, i, game) == FAILURE)
 	{
 		close(game->mapinfo.fd);
-		return;
+		return ;
 	}
 	close(game->mapinfo.fd);
 }

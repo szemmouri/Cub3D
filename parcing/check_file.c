@@ -6,7 +6,7 @@
 /*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 12:33:57 by szemmour          #+#    #+#             */
-/*   Updated: 2025/07/15 11:07:52 by szemmour         ###   ########.fr       */
+/*   Updated: 2025/07/27 12:08:25 by szemmour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	has_extension(const char *filename, const char *ext)
 
 int	check_file(char *file_name, int cub)
 {
-	int fd;
+	int	fd;
 
 	if (is_dir(file_name))
 		return (print_error(file_name, ERR_FILE_IS_DIR), FAILURE);
