@@ -6,7 +6,7 @@
 /*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 12:02:13 by szemmour          #+#    #+#             */
-/*   Updated: 2025/07/27 12:11:28 by szemmour         ###   ########.fr       */
+/*   Updated: 2025/08/04 10:40:02 by szemmour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static int	count_map_lines(t_game *game, char **file, int i)
 	while (file[i])
 	{
 		j = 0;
-		while (file[i][j] == ' ' || file[i][j] == '\t' || file[i][j] == '\r'
-			|| file[i][j] == '\v' || file[i][j] == '\f')
+		while (is_space(file[i][j]))
 			j++;
 		if (!file[i][j] || file[i][j] == '\n')
 			break ;

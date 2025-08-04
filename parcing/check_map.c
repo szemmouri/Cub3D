@@ -6,7 +6,7 @@
 /*   By: szemmour <szemmour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 12:01:46 by szemmour          #+#    #+#             */
-/*   Updated: 2025/07/27 12:09:02 by szemmour         ###   ########.fr       */
+/*   Updated: 2025/08/04 10:39:16 by szemmour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,7 @@ static int	check_map_is_at_the_end(t_mapinfo *map)
 		j = 0;
 		while (map->file[i][j])
 		{
-			if (map->file[i][j] != ' ' && map->file[i][j] != '\t'
-				&& map->file[i][j] != '\r' && map->file[i][j] != '\n'
-				&& map->file[i][j] != '\v' && map->file[i][j] != '\f')
+			if (is_space(map->file[i][j]) && map->file[i][j] != '\n')
 				return (FAILURE);
 			j++;
 		}
